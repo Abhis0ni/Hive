@@ -127,7 +127,9 @@ Hive;
 21) To load data from csv table to parquet table
 
     from sales_data_row insert overwrite table sales_data_row_pq select *;
+    
     or
+    
     insert overwrite table sales_data_row_pq select * from sales_data_row;
     
 
@@ -164,10 +166,12 @@ Hive;
      partitioned by (COUNTRY string);
 
 27) To load data to static partitioned table from other table
+
     insert overwrite table sales_data_static_part partition(country='USA')
     select ordernumber,quantityordered,sales,year_id from sales_order_data_orc where country='USA';
 
 28) To select records from static partitioned table
+    
     select * from sales_data_static_part where country='USA';
 
 **29) To create a dynamic partitioning table**
@@ -182,10 +186,12 @@ Hive;
      partitioned by (COUNTRY string);
 
 30) To load data to dynamic partitioned table from other table
+    
     insert overwrite table sales_data_dynamic_part partition(country)
     select ordernumber,quantityordered,sales,year_id,country from sales_order_data_orc;
 
 31) To set partitioning property to nonstrict
+    
     set hive.exec.dynamic.partition.mode=nonstrict
 
 **32) To create a multi level dynamic partitioning table**
@@ -199,6 +205,7 @@ Hive;
      partitioned by (COUNTRY string,YEAR_ID int);
 
 33) To load data to multi level dynamic partitioned table from other table
+    
     insert overwrite table sales_data_dynamic_multi_part partition(country,year_id)
     select ordernumber,quantityordered,sales,country,year_id from sales_order_data_orc;
 
@@ -215,6 +222,7 @@ Hive;
      into 3 buckets;
 
 35) To load records to bucketing table from existing table
+    
     insert overwrite table buck_users select * from users;
 
 **Joins**
@@ -222,19 +230,25 @@ Hive;
 **36) Map join (Broadcast join)**
 
     set hive.auto.convert.join=true;
+    
     select * from buck_users u inner join buck_locations l on u.id=l.id;
 
 **37) Bucket map join**
 
     set hive.optimize.bucketmapjoin=true;
+    
     select * from buck_users u inner join buck_locations l on u.id=l.id;
 
 **38) sorted merge bucket join**
 
     set hive.enforce.sortmergebucketmapjoin=false;
+    
     set hive.auto.convert.sortmerge.join=true;
+    
     set hive.optimize.bucketmapjoin = true;
+    
     set hive.optimize.bucketmapjoin.sortedmerge = true;
+    
     select * from buck_users u inner join buck_locations l on u.id=l.id;
 
 39) exit;
