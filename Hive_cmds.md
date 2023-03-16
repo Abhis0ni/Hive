@@ -5,11 +5,14 @@ docker exec -it d2e715017c17e3a03a2dc745e56b1ac1c37a00cc1f117b5d310f4d2d963d4b48
 **-To start Hive**
 
 Hive;
- 
-1) show databases;
-2) create database hive_db;
-3) use hive_db;
-4) show tables;
+
+show databases;
+
+create database hive_db;
+
+use hive_db;
+
+show tables;
 
 **5) To create internal table**
 
