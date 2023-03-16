@@ -9,11 +9,13 @@ docker exec -it namenode bash
 **1) To check root directories**
 
  hadoop fs -ls /user/hive/warehouse/hive_db.db
+ 
  hdfs dfs -ls /user/hive/warehouse/hive_db.db
 
 **2) To create a directory in HDFS**
 
  hadoop fs -mkdir /user/input
+ 
  hdfs dfs -mkdir -p /user/input2
 
 **3) To copy file from namenode to HDFS**
