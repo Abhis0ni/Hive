@@ -14,7 +14,7 @@ use hive_db;
 
 show tables;
 
-**5) To create internal table**
+**- To create internal table**
 
       create table department_data
       (dept_id int,
@@ -24,9 +24,11 @@ show tables;
       row format delimited
       fields terminated by ',';
       
-6) describe department_data;
-7) describe formatted department_data;
-8) set hive.cli.print.header=true;
+describe department_data;
+
+describe formatted department_data;
+
+set hive.cli.print.header=true;
 
 
 **8) to load data in table from local path file**
