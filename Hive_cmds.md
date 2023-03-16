@@ -2,6 +2,7 @@
 
 docker exec -it d2e715017c17e3a03a2dc745e56b1ac1c37a00cc1f117b5d310f4d2d963d4b48 /bin/bash
 
+
 **-To start Hive**
 
 Hive;
@@ -13,6 +14,7 @@ create database hive_db;
 use hive_db;
 
 show tables;
+
 
 **- To create internal table**
 
@@ -31,13 +33,17 @@ describe formatted department_data;
 set hive.cli.print.header=true;
 
 
+
 **- To load data in table from local path file**
 
    load data local inpath 'file:///department_data.csv' into table department_data;
    
+   
+   
 **- To load data in table from HDFS path file**
 
    load data inpath '/user/input/depart_data.csv' into table department_data;
+
 
 
 **- To create external table**
@@ -50,6 +56,8 @@ set hive.cli.print.header=true;
            row format delimited
            fields terminated by ','
            location '/user/input2/';
+           
+           
 
 **- To create table for array based file**
 
@@ -67,6 +75,8 @@ set hive.cli.print.header=true;
      array_contains(skills,"HADOOP") as knows_hadoop,
      sort_array(skills) as sorted_skills
      from employee;
+     
+     
 
 **- To create table for dictionary based file**
 
@@ -88,9 +98,13 @@ set hive.cli.print.header=true;
      map_values(details) as dist_values
      from employee_map_data;
 
+
+
 **- To create a backup copy of a table**
 
     create table employee_backup as select * from employee;
+    
+    
 
 **- To create a table based using sedre**
 
@@ -105,6 +119,8 @@ set hive.cli.print.header=true;
      )
      stored as textfile
      tblproperties ("skip.header.line.count"="1");
+     
+     
 
 **- To create a table based on json file**
 
@@ -116,9 +132,13 @@ set hive.cli.print.header=true;
      'org.apache.hive.hcatalog.data.JsonSerDe'
      stored as textfile;
 
+
+
 **- To add a jar file in hive shell**
 
     add jar file:///config/workspace/hive-hcatalog-core-0.14.0.jar;
+    
+    
 
 **- To create parquet table**
 
@@ -129,6 +149,8 @@ set hive.cli.print.header=true;
      )
      stored as parquet;
 
+
+
 **- To load data from csv table to parquet table**
 
     from sales_data_row insert overwrite table sales_data_row_pq select *;
@@ -136,6 +158,8 @@ set hive.cli.print.header=true;
     or
     
     insert overwrite table sales_data_row_pq select * from sales_data_row;
+    
+    
     
 
 **- To create ORC table**
@@ -147,17 +171,25 @@ set hive.cli.print.header=true;
      )
      stored as orc;
 
+
+
 **- To load data from csv table to orc table**
 
     from sales_data_row insert overwrite table sales_data_row_orc select *;
+
+
 
 **- To set reducer size in mapreduce**
 
     set mapreduce.job.reduces=3;
 
+
+
 **- To set max reducer in mapreduce**
 
     set hive.exec.reducers.max=10;
+
+
 
 **- To create a static partitioning table**
 
@@ -179,6 +211,8 @@ set hive.cli.print.header=true;
     
     select * from sales_data_static_part where country='USA';
 
+
+
 **- To create a dynamic partitioning table**
 
     create table sales_data_dynamic_part
@@ -199,6 +233,8 @@ set hive.cli.print.header=true;
     
     set hive.exec.dynamic.partition.mode=nonstrict
 
+
+
 **- To create a multi level dynamic partitioning table**
 
     create table sales_data_dynamic_multi_part
@@ -213,6 +249,8 @@ set hive.cli.print.header=true;
     
     insert overwrite table sales_data_dynamic_multi_part partition(country,year_id)
     select ordernumber,quantityordered,sales,country,year_id from sales_order_data_orc;
+
+
 
 **- To create bucking table**
 
@@ -230,17 +268,23 @@ set hive.cli.print.header=true;
     
     insert overwrite table buck_users select * from users;
 
+
+
 **- Map join (Broadcast join)**
 
     set hive.auto.convert.join=true;
     
     select * from buck_users u inner join buck_locations l on u.id=l.id;
 
+
+
 **- Bucket map join**
 
     set hive.optimize.bucketmapjoin=true;
     
     select * from buck_users u inner join buck_locations l on u.id=l.id;
+
+
 
 **- sorted merge bucket join**
 
