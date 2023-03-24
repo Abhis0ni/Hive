@@ -1,6 +1,6 @@
 **-To copy .csv(any file) from local to namenode(Linux path)**
 
-docker cp breweries.csv namenode:breweries.csv
+docker cp D:\Hive\depart_data.csv namenode:depart_data.csv
 
 **-To go to namenode path**
 
