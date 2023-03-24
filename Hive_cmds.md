@@ -298,4 +298,18 @@ set hive.cli.print.header=true;
     
     select * from buck_users u inner join buck_locations l on u.id=l.id;
 
-- exit;
+**- To add udf file to Hive shell from hdfs**
+    add file hdfs:/user/input/multiply_udf.py;
+
+**- To add udf file to Hive shell from local**
+    add file file:///home/hadoop/multiply_udf.py;
+
+**- To transform data using udf**
+    select transform(quantityordered) using 'python multiply_udf.py' as (quantityordered int) from sales_order_data_orc limit 5;
+
+**- To transform multiple data using udf**
+    select transform(country,ordernumber,quantityordered) using 'python many_column_udf.py' as (country string,ordernumber int,multiplied_qty int) from sales_order_data_orc limit 5;
+
+**- exit;**
+
+
