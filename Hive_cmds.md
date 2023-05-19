@@ -46,7 +46,7 @@ set hive.cli.print.header=true;
 
 
 
-**- To create external table**
+**- To create external table**     --- no need to load file after table creation
 
            create external table Ex_department_data
            (dept_id int,
@@ -313,6 +313,12 @@ set hive.cli.print.header=true;
 **- To transform multiple data using udf**
 
     select transform(country,ordernumber,quantityordered) using 'python many_column_udf.py' as (country string,ordernumber int,multiplied_qty int) from sales_order_data_orc limit 5;
+
+
+**- To load data into csv file**
+
+    insert overwrite directory '/Mini/Agent_info.csv' row format delimited fields terminated by ',' 
+select * from AGNT_LOG_REPORT T0 INNER JOIN AGNT_PERFORMANCE T1 ON T0.AGENT=T1.A_NAME;
 
 **- exit;**
 
