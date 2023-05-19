@@ -318,7 +318,7 @@ set hive.cli.print.header=true;
 **- To load data into csv file**
 
     insert overwrite directory '/Mini/Agent_info.csv' row format delimited fields terminated by ',' 
-select * from AGNT_LOG_REPORT T0 INNER JOIN AGNT_PERFORMANCE T1 ON T0.AGENT=T1.A_NAME;
+    select * from AGNT_LOG_REPORT T0 INNER JOIN AGNT_PERFORMANCE T1 ON T0.AGENT=T1.A_NAME;
 
 **- exit;**
 
